@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+
+public class Student {
+    public String name;
+    public int age;
+    public String id;
+    public double gpa;
+
+    // Constructor
+    public Student(String name, int age, String id, double gpa) {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+        this.gpa = gpa;
+    }
+
+    // Static method to calculate total GPA for all students in a department
+    public static double calculateTotalGpa(ArrayList<Student> students) {
+        double totalGpa = 0;
+        for (int i = 0; i < students.size(); i++) {
+            totalGpa += students.get(i).gpa;
+        }
+        return totalGpa;
+    }
+
+    // Static method to find the student with the highest GPA in a department
+    public static Student findHighestGpaStudent(ArrayList<Student> students) {
+        if (students.isEmpty()) return null;
+        Student highestGpaStudent = students.get(0);
+        for (int i = 1; i < students.size(); i++) {
+            if (students.get(i).gpa > highestGpaStudent.gpa) {
+                highestGpaStudent = students.get(i);
+            }
+        }
+        return highestGpaStudent;
+    }
+}

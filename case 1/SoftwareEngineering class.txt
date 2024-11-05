@@ -1,0 +1,13 @@
+public class SoftwareEngineering extends Department {
+
+    // Calculate the average GPA of students in the Software Engineering department
+    public double calculateAverageGpa() {
+        if (students.isEmpty()) return 0;
+        return Student.calculateTotalGpa(students) / students.size();
+    }
+
+    // Return the number of students in the Software Engineering department
+    public int countStudents() {
+        return students.size();
+    }
+}

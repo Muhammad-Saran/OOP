@@ -1,0 +1,77 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt user to enter the number of students
+        System.out.print("Enter the number of students: ");
+        int numberOfStudents = scanner.nextInt();
+
+        // ArrayList to hold all students
+        ArrayList<Student> students = new ArrayList<>();
+
+        // Get student information from the user
+        for (int i = 0; i < numberOfStudents; i++) {
+            System.out.println("Enter details for student " + (i + 1));
+
+            System.out.print("Name: ");
+            String name = scanner.next();
+
+            System.out.print("Age: ");
+            int age = scanner.nextInt();
+
+            System.out.print("ID: ");
+            String id = scanner.next();
+
+            System.out.print("GPA: ");
+            double gpa = scanner.nextDouble();
+
+            // Add student to list
+            students.add(new Student(name, age, id, gpa));
+        }
+
+        // Departments
+        ComputerScience csDepartment = new ComputerScience();
+        SoftwareEngineering seDepartment = new SoftwareEngineering();
+
+        // Assign students to departments based on GPA
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+            if (student.gpa >= 3.5) {
+                csDepartment.addStudent(student);
+            } else {
+                seDepartment.addStudent(student);
+            }
+        }
+
+        // Display students in each department
+        System.out.println("\nComputer Science Students:");
+        csDepartment.displayStudents();
+
+        System.out.println("\nSoftware Engineering Students:");
+        seDepartment.displayStudents();
+
+        // Display total GPA, average GPA, and highest GPA for each department
+        System.out.println("\nComputer Science Department Statistics:");
+        System.out.println("Total GPA: " + Student.calculateTotalGpa(csDepartment.getStudents()));
+        System.out.println("Average GPA: " + csDepartment.calculateAverageGpa());
+        Student csTopStudent = Student.findHighestGpaStudent(csDepartment.getStudents());
+        if (csTopStudent != null) {
+            System.out.println("Highest GPA: " + csTopStudent.gpa + " (" + csTopStudent.name + ")");
+        }
+        System.out.println("Number of Students: " + csDepartment.countStudents());
+
+        System.out.println("\nSoftware Engineering Department Statistics:");
+        System.out.println("Total GPA: " + Student.calculateTotalGpa(seDepartment.getStudents()));
+        System.out.println("Average GPA: " + seDepartment.calculateAverageGpa());
+        Student seTopStudent = Student.findHighestGpaStudent(seDepartment.getStudents());
+        if (seTopStudent != null) {
+            System.out.println("Highest GPA: " + seTopStudent.gpa + " (" + seTopStudent.name + ")");
+        }
+        System.out.println("Number of Students: " + seDepartment.countStudents());
+
+        scanner.close();
+    }
+}

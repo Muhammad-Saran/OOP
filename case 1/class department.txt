@@ -1,0 +1,28 @@
+import java.util.ArrayList;
+
+public class Department {
+    public ArrayList<Student> students;
+
+    // Constructor
+    public Department() {
+        students = new ArrayList<>();
+    }
+
+    // Add a student to the department
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    // Display all students in the department
+    public void displayStudents() {
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+            System.out.println("Name: " + student.name + ", GPA: " + student.gpa);
+        }
+    }
+
+    // Getter for the students list
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+}
