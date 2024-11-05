@@ -1,0 +1,75 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Library library = new Library();
+        Scanner scanner = new Scanner(System.in);
+
+        // Sample data entry
+        library.addBook(new Book("The Great Gatsby", "F. Scott Fitzgerald", "123ABC"));
+        library.addBook(new Book("To Kill a Mockingbird", "Harper Lee", "456DEF"));
+        library.addBook(new Book("1984", "George Orwell", "789GHI"));
+
+        library.addMember(new Member("Alice", "M001"));
+        library.addMember(new Member("Bob", "M002"));
+
+        // Menu-driven interface
+        while (true) {
+            System.out.println("\nLibrary Management System:");
+            System.out.println("1. Add Book");
+            System.out.println("2. Add Member");
+            System.out.println("3. Lend Book");
+            System.out.println("4. Return Book");
+            System.out.println("5. Display Available Books");
+            System.out.println("6. Find Most Borrowed Book");
+            System.out.println("7. Exit");
+            System.out.print("Choose an option: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter title: ");
+                    String title = scanner.next();
+                    System.out.print("Enter author: ");
+                    String author = scanner.next();
+                    System.out.print("Enter ISBN: ");
+                    String isbn = scanner.next();
+                    library.addBook(new Book(title, author, isbn));
+                    break;
+                case 2:
+                    System.out.print("Enter member name: ");
+                    String name = scanner.next();
+                    System.out.print("Enter member ID: ");
+                    String memberId = scanner.next();
+                    library.addMember(new Member(name, memberId));
+                    break;
+                case 3:
+                    System.out.print("Enter book ISBN to lend: ");
+                    isbn = scanner.next();
+                    System.out.print("Enter member ID: ");
+                    memberId = scanner.next();
+                    library.lendBook(isbn, memberId);
+                    break;
+                case 4:
+                    System.out.print("Enter book ISBN to return: ");
+                    isbn = scanner.next();
+                    System.out.print("Enter member ID: ");
+                    memberId = scanner.next();
+                    library.returnBook(isbn, memberId);
+                    break;
+                case 5:
+                    library.displayAvailableBooks();
+                    break;
+                case 6:
+                    library.findMostBorrowedBook();
+                    break;
+                case 7:
+                    System.out.println("Exiting the system. Goodbye!");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}

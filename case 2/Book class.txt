@@ -1,0 +1,33 @@
+public class Book {
+    public String title;
+    public String author;
+    public String isbn;
+    public boolean isAvailable;
+    private int borrowCount;
+
+    // Constructor
+    public Book(String title, String author, String isbn) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.isAvailable = true; // Book is available by default
+        this.borrowCount = 0; // Initialize borrow count
+    }
+
+    // Getter and Setter methods
+    public String getTitle() { return title; }
+    public String getAuthor() { return author; }
+    public String getIsbn() { return isbn; }
+    public boolean isAvailable() { return isAvailable; }
+    public int getBorrowCount() { return borrowCount; }
+
+    // Methods to update availability status
+    public void markAsBorrowed() {
+        isAvailable = false;
+        borrowCount++;
+    }
+
+    public void markAsReturned() {
+        isAvailable = true;
+    }
+}

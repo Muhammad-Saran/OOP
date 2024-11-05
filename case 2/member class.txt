@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+
+public class Member {
+    public String name;
+    public String memberId;
+    public ArrayList<Book> borrowedBooks;
+
+    // Constructor
+    public Member(String name, String memberId) {
+        this.name = name;
+        this.memberId = memberId;
+        this.borrowedBooks = new ArrayList<>();
+    }
+
+    // Method to borrow a book
+    public void borrowBook(Book book) {
+        if (book.isAvailable) {
+            book.markAsBorrowed();
+            borrowedBooks.add(book);
+            System.out.println(name + " borrowed " + book.title);
+        } else {
+            System.out.println(book.title + " is currently unavailable.");
+        }
+    }
+
+    // Method to return a book
+    public void returnBook(Book book) {
+        if (borrowedBooks.remove(book)) {
+            book.markAsReturned();
+            System.out.println(name + " returned " + book.title);
+        } else {
+            System.out.println(name + " does not have " + book.title + " borrowed.");
+        }
+    }
+
+    // Method to display borrowed books
+    public void displayBorrowedBooks() {
+        System.out.println("Books borrowed by " + name + ":");
+        for (Book book : borrowedBooks) {
+            System.out.println("- " + book.title);
+        }
+    }
+}

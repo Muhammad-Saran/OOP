@@ -1,0 +1,94 @@
+import java.util.ArrayList;
+
+public class Library {
+    public ArrayList<Book> books;
+    public ArrayList<Member> members;
+
+    // Constructor
+    public Library() {
+        books = new ArrayList<>();
+        members = new ArrayList<>();
+    }
+
+    // Method to add a book to the library
+    public void addBook(Book book) {
+        books.add(book);
+        System.out.println(book.title + " has been added to the library.");
+    }
+
+    // Method to add a member to the library
+    public void addMember(Member member) {
+        members.add(member);
+        System.out.println(member.name + " has been registered as a member.");
+    }
+
+    // Method to lend a book to a member
+    public void lendBook(String isbn, String memberId) {
+        Book book = findBookByIsbn(isbn);
+        Member member = findMemberById(memberId);
+
+        if (book != null && member != null) {
+            member.borrowBook(book);
+        } else {
+            System.out.println("Book or member not found.");
+        }
+    }
+
+    // Method to return a book
+    public void returnBook(String isbn, String memberId) {
+        Book book = findBookByIsbn(isbn);
+        Member member = findMemberById(memberId);
+
+        if (book != null && member != null) {
+            member.returnBook(book);
+        } else {
+            System.out.println("Book or member not found.");
+        }
+    }
+
+    // Display all available books
+    public void displayAvailableBooks() {
+        System.out.println("Available books in the library:");
+        for (Book book : books) {
+            if (book.isAvailable) {
+                System.out.println("- " + book.title + " by " + book.author);
+            }
+        }
+    }
+
+    // Find the most borrowed book in the library
+    public void findMostBorrowedBook() {
+        if (books.isEmpty()) {
+            System.out.println("No books in the library.");
+            return;
+        }
+
+        Book mostBorrowedBook = books.get(0);
+        for (Book book : books) {
+            if (book.getBorrowCount() > mostBorrowedBook.getBorrowCount()) {
+                mostBorrowedBook = book;
+            }
+        }
+        System.out.println("Most borrowed book: " + mostBorrowedBook.title + 
+                           " with " + mostBorrowedBook.getBorrowCount() + " borrows.");
+    }
+
+    // Helper methods to find a book or member
+    private Book findBookByIsbn(String isbn) {
+        for (Book book : books) {
+            if (book.getIsbn().equals(isbn)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    private Member findMemberById(String memberId) {
+        for (Member member : members) {
+            if (member.memberId.equals(memberId)) {
+                return member;
+            }
+        }
+        return null;
+    }
+}
